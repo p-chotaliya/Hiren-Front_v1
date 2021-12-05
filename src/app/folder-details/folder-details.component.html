@@ -1,0 +1,62 @@
+<div class="container" style="margin-bottom: 20px">
+  <mat-expansion-panel [expanded]=false>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        ADD IMAGE
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="d-flex row">
+      <mat-form-field class="example-form-field" appearance="outline" style="margin-right: 20px">
+        <mat-label>Enter File URL</mat-label>
+        <input matInput type="text" [(ngModel)]="urlvalue">
+        <button mat-button *ngIf="urlvalue" matSuffix mat-icon-button aria-label="Clear" (click)="urlvalue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field class="example-form-field" appearance="outline" style="margin-right: 20px">
+        <mat-label>Enter File Name</mat-label>
+        <input matInput type="text" [(ngModel)]="filevalue">
+        <button mat-button *ngIf="filevalue" matSuffix mat-icon-button aria-label="Clear" (click)="filevalue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field class="example-form-field" appearance="outline" style="margin-right: 20px">
+        <mat-label>Additional File Name</mat-label>
+        <input matInput type="text" [(ngModel)]="filevalue2">
+        <button mat-button *ngIf="filevalue2" matSuffix mat-icon-button aria-label="Clear" (click)="filevalue2=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-raised-button color="primary" style="margin-top: 8px;height: 40px" (click)="addfile()">Add File</button>
+    </div>
+  </mat-expansion-panel>
+</div>
+<div class="container">
+  <div>
+    <mat-card style="width: 100%" *ngFor="let file of fileList">
+      <div class="container">
+        <div class="d-flex bd-highlight" style="width: 100%">
+          <div class="p-2 w-100 bd-highlight">
+            <div class="d-flex">
+              <div mat-card-avatar class="example-header-image"
+                   style="background-image: url('{{php_api}}/{{file.filepath}}');
+                   height: 65px;
+                   width: 65px;
+                    background-size: cover">
+              </div>
+              <h6 style="padding-top: 20px;margin-left: 30px">{{file.filename}}</h6>
+            </div>
+          </div>
+          <div class="p-2 flex-shrink-1 bd-highlight" style="margin-right: 10px">
+            <button style="margin-left: 30px" mat-fab matTooltip="Delete Image"
+                    color="primary" aria-label="Example icon button with a delete icon" (click)="deleteImage(file.filepath)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+      </div>
+    </div>
+    </mat-card>
+  </div>
+</div>
+
+<!--  http://phpstack-192394-571052.cloudwaysapps.com-->

@@ -1,0 +1,57 @@
+<!--<div class="jumbotron container">-->
+<!--  <h1>Admin Login</h1>-->
+<!--<form [formGroup]="adminForm" (ngSubmit)="onsubmit(adminForm)">-->
+<!--  <div class="form-group">-->
+<!--    <label for="exampleInputEmail1">Username</label>-->
+<!--    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" formControlName="username">-->
+<!--    <small id="emailHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>-->
+<!--  </div>-->
+<!--  <div class="form-group">-->
+<!--    <label for="exampleInputPassword1">Password</label>-->
+<!--    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" formControlName="password">-->
+<!--  </div>-->
+<!--  <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--</form>-->
+<!--  <div *ngIf="returnMessage">-->
+<!--    <div class="alert alert-danger" role="alert">-->
+<!--      {{returnMessage}}-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<section id="cover" class="min-vh-100">
+  <div id="cover-caption">
+    <div class="container jumbotron">
+      <div class="d-flex justify-content-end"><button class="btn btn-primary" (click)="home()">Home</button></div>
+      <div class="row text-white">
+        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+          <h1 class="display-4 py-2" id="text-color">Admin Panel</h1>
+          <div class="px-4 pt-4">
+            <form  [formGroup]="adminForm" (ngSubmit)="onsubmit(adminForm)" action="" class="justify-content-center">
+              <div class="form-group">
+                <label class="sr-only">username</label>
+                <input type="text" class="form-control" placeholder="Username" formControlName="username" >
+                <span class="text-danger"
+                      *ngIf="(this.adminForm.controls.username.touched || submitted) && this.adminForm.controls.username.errors?.required">
+                          username is required
+                </span>
+              </div>
+              <div class="form-group">
+                <label class="sr-only">password</label>
+                <input type="password" class="form-control" placeholder="Password" formControlName="password" >
+                <span class="text-danger"
+                      *ngIf="(this.adminForm.controls.password.touched || submitted) && this.adminForm.controls.password.errors?.required">
+                          password is required
+                </span>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg" [disabled]="submitButton">Submit</button>
+            </form>
+          </div>
+          <div *ngIf="returnMessage" class="alert alert-danger" role="alert" id="alertmessage">
+            {{returnMessage}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

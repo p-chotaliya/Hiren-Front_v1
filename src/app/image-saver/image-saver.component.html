@@ -1,0 +1,31 @@
+<button style="margin: 20px;height: 56px;background-color: #152ccd" mat-fab matTooltip="Home"
+        color="primary" aria-label="Example icon button with a delete icon"
+        (click)="goHome()">
+  <mat-icon>home</mat-icon>
+</button>
+<div id="folders" class="d-flex justify-content-center">
+<mat-form-field appearance="outline">
+  <mat-label>Select Folder</mat-label>
+  <mat-select (valueChange)="folderDetails($event)">
+    <div>
+      <input id="searchFolder" matInput type="text" placeholder="search folders" style="border: none"focused="'true'" [(ngModel)]="search_folder"/>
+    </div>
+    <mat-option>None</mat-option>
+    <mat-option *ngFor="let folder of folder_list | remarkFilter: search_folder"  value="{{folder}}">{{folder}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+  <button style="margin-left: 20px;height: 56px;margin-top: 5px" mat-fab matTooltip="Add New Folder"
+          color="primary" aria-label="Example icon button with a delete icon"
+          (click)="goaddFolder()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <button style="margin-left: 20px;height: 56px;margin-top: 5px;background-color: #cd0000" mat-fab matTooltip="Delete Folder"
+          color="primary" aria-label="Example icon button with a delete icon"
+          (click)="godeleteFolder()">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>
+<div>
+  <router-outlet></router-outlet>
+</div>

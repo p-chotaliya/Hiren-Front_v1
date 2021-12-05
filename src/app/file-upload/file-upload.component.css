@@ -1,0 +1,55 @@
+#cover {
+  background-size: cover;
+  height: 100%;
+  text-align: initial;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: 20px;
+}
+.container{
+  padding-top: 14px;
+}
+#cover-caption {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+#text-color{
+  color: black;
+}
+
+#alertmessage{
+  margin-top: 30px;
+}
+
+#heading{
+  font-family: Serif;
+}
+.progress{
+  background: darkgray;
+  margin-top: 20px;
+}
+#uploadmessage{
+  margin-top: 20px;
+}
+
+#othermessage{
+  margin-top: 20px;
+}
+.search-product{
+  width: 35%;
+  margin-bottom: 25px;
+}
+.fa{
+  color: white;
+  width: 120%;
+}
+.fa-trash-o{
+  color: #c92e00;
+}
+.btn{
+  vertical-align: middle;
+}
+/* only used for background overlay not needed for centering */

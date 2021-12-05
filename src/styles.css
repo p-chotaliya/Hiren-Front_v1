@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*.mat-snack-bar-container{*/
+/*  background-color: red;*/
+/*  color: white;*/
+/*}*/
+/*.mat-snack-bar-container .mat-simple-snackbar-action{*/
+/*  background-color: red;*/
+/*  color: white;*/
+/*}*/
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: blue;
+}
+
+button:focus{
+  outline: none;
+}
+.mat-expansion-panel-header{
+  background-color: #3f51b5;
+}
+.mat-expansion-panel-header-title{
+  color: black;
+}
+.mat-list-item-content{
+  justify-content: space-between;
+}
+
+.errorSnackbar {
+  background-color: red;
+  color: white;
+}
+
+.successSnackbar {
+  background-color: green;
+  color: white;
+}
+.mat-tooltip {
+  font-size: 20px;
+}
+.example-card.mat-card{
+  padding: 0px;
+}

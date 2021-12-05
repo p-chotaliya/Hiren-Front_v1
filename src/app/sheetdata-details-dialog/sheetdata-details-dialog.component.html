@@ -1,0 +1,45 @@
+<div style="height: 600px">
+  <h4 class="d-flex justify-content-center" style="margin-bottom: 0">
+    {{ data.sheetdataDetail.campaign }}
+  </h4>
+  <div style="margin-top: 50px">
+    <table
+      class="table table-responsive table-striped table-bordered"
+      style="overflow-y: scroll; height: 465px"
+    >
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Cost Conv</th>
+          <th scope="col">Conversions</th>
+          <th scope="col">Conv per Day</th>
+          <th scope="col">Profit %</th>
+          <th scope="col">Profit per Day</th>
+          <th scope="col">E CPM</th>
+          <th scope="col">Remark</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of campaign_data">
+          <th scope="row">{{ item.date }}</th>
+          <td>{{ item.cost_conv }}</td>
+          <td>{{ item.conversions }}</td>
+          <td>{{ item.conversions_per_day }}</td>
+          <td>{{ item.Profit }}</td>
+
+          <td [style.color]="item.PerDayProfit < 0 ? 'red' : 'black'">
+            {{ item.PerDayProfit }}
+          </td>
+          <td>{{ item.Rpm }}</td>
+          <td>{{ item.remark }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <hr class="my-2" />
+  <div mat-dialog-actions>
+    <button mat-button (click)="closeDialog()" mat-flat-button color="warn">
+      Cancel
+    </button>
+  </div>
+</div>

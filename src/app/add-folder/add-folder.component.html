@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="d-flex justify-content-center">
+<mat-card style="width: 100%">
+  <div class="d-flex justify-content-center align-items-center">
+      <mat-form-field class="example-form-field" appearance="outline" style="margin-right: 20px">
+        <mat-label>Enter Folder Name</mat-label>
+          <input matInput type="text" [(ngModel)]="foldervalue">
+        <button mat-button *ngIf="foldervalue" matSuffix mat-icon-button aria-label="Clear" (click)="foldervalue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-raised-button color="primary" style="margin-bottom: 25px" (click)="addfolder(foldervalue)">Add</button>
+  </div>
+</mat-card>
+  </div>
+</div>

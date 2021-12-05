@@ -1,0 +1,24 @@
+#cover {
+  background-size: cover;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+#cover-caption {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+#text-color{
+  color: black;
+}
+
+#alertmessage{
+  margin-top: 30px;
+}
+
+/* only used for background overlay not needed for centering */

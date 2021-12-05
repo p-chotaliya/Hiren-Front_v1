@@ -1,0 +1,73 @@
+
+<!--<div class="jumbotron container">-->
+<!--  <h2>hello</h2>-->
+<!--  <h1>Add User</h1>-->
+<!--  <form [formGroup]="adduser" (ngSubmit)="onsubmit(adduser)">-->
+<!--    <div class="form-group">-->
+<!--      <label>Name</label>-->
+<!--      <input type="text" class="form-control" id="exampleInputname" placeholder="Enter Name " formControlName="name">-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <label for="exampleInputEmail1">Username</label>-->
+<!--      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" formControlName="username">-->
+<!--      <small id="emailHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <label for="exampleInputPassword1">Password</label>-->
+<!--      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" formControlName="password">-->
+<!--    </div>-->
+<!--    <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--  </form>-->
+<!--</div>-->
+<!--<div class="jumbotron container" *ngIf="message">-->
+<!--  <h2>{{message}}</h2>-->
+<!--</div>-->
+<section id="cover" class="min-vh-100">
+  <div id="cover-caption">
+    <div class="container jumbotron">
+      <div class="d-flex justify-content-end"><button class="btn btn-primary" (click)="logout()">Logout</button></div>
+      <div class="row">
+        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+          <h1 class="display-4 py-2 text-truncate">Welcome {{adminname}}</h1>
+          <div class="px-4 pt-4">
+            <form  [formGroup]="adduser" (ngSubmit)="onsubmit(adduser)">
+              <div class="form-group">
+                <label style="display: flex">Name</label>
+                      <input type="text" class="form-control " placeholder="Enter Name " formControlName="name">
+                      <span class="text-danger"
+                            *ngIf="(this.adduser.controls.name.touched || submitted) && this.adduser.controls.name.errors?.required">
+                                name is required
+                      </span>
+              </div>
+              <div class="form-group">
+                <label style="display: flex">Username</label>
+                      <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Username" formControlName="username">
+                      <small id="emailHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>
+                      <span class="text-danger"
+                      *ngIf="(this.adduser.controls.username.touched || submitted) && this.adduser.controls.username.errors?.required">
+                                username is required
+                      </span>
+              </div>
+              <div class="form-group">
+                <label style="display: flex">Password</label>
+                      <input type="password" class="form-control "placeholder="Password" formControlName="password">
+                      <span class="text-danger"
+                      *ngIf="(this.adduser.controls.password.touched || submitted) && this.adduser.controls.password.errors?.required">
+                                password is required
+                      </span>
+
+              </div>
+                    <button type="submit" class="btn btn-primary" [disabled]="submitButton">Submit</button>
+            </form>
+            <div *ngIf="message" class="alert alert-danger" role="alert" id="alertmessage">
+              {{message}}
+            </div>
+            <div *ngIf="successmessage" class="alert alert-success" role="alert" id="successmessage">
+              {{successmessage}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

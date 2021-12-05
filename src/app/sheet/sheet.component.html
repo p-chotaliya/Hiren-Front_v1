@@ -1,0 +1,347 @@
+<section id="cover" class="min-vh-50">
+  <div id="cover-caption">
+    <div class="container-fluid jumbotron" style="padding-top: 0.5rem;padding-bottom: 1rem;margin-bottom: 5px" id="upform">
+      <div style="margin-top: 0px">
+        <div [style.display]="DisableUploadButtom ? '' : 'none'">
+          <mat-progress-bar mode="query"></mat-progress-bar>
+        </div>
+      </div>
+      <div class="d-flex justify-content-start">
+        <button class="btn btn-primary" (click)="goToHome()" style="margin-right: 10px">Home</button>
+      </div>
+      <div style="margin-top: 5px">
+          <div class="d-flex row">
+            <div class="col-sm">
+              <mat-card class="example-card">
+              <mat-card-content>
+                        <label style="display: block;font-size: 18px;height: 26px">Select Campaign File <label style="color: red">*</label></label>
+                        <span class="text-danger" *ngIf="sheet1_Validation">Please Choose File</span>
+                    <div class="d-flex">
+                        <input style="margin-left: 30px;width: 200px;margin-top: 12px"  [disabled]="DisableUploadButtom" #fileinput1  accept=".csv" type="file"  (change)="onuploadsheet1($event)"/>
+                        <mat-form-field appearance="outline" style="width: 150px">
+                          <mat-label>select campaign sheet</mat-label>
+                          <mat-select #selectDropdown1 (valueChange)="onselectsheet1($event)" [disabled]="DisableUploadButtom">
+                            <div>
+                              <input id="dateinput" matInput type="text" placeholder="search sheet"
+                                     style="border: none" focused="'true'" [(ngModel)]="sheet1input"
+                                     [ngModelOptions]="{standalone: true}"/>
+                            </div>
+                            <mat-option value="select">None</mat-option>
+                            <mat-option *ngFor="let item of userFiles | filter:sheet1input" [value]="item.path">{{item.file_name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                    </div>
+              </mat-card-content>
+            </mat-card>
+            </div>
+            <div class="col-sm">
+              <mat-card class="example-card">
+              <mat-card-content>
+                <label style="display: block;font-size: 18px">Select A Cost File</label>
+                <div class="d-flex">
+                        <input style="margin-left: 30px;width: 200px;margin-top: 12px"  [disabled]="DisableUploadButtom" #fileinput2  accept=".csv" type="file" (change)="onuploadsheet2($event)"/>
+                        <mat-form-field appearance="outline" style="width: 150px">
+                          <mat-label>select Acost sheet</mat-label>
+                          <mat-select #selectDropdown2 (valueChange)="onselectsheet2($event)"  [disabled]="DisableUploadButtom">
+                            <div>
+                              <input id="dateinput" matInput type="text" placeholder="search sheet"
+                                     style="border: none" focused="'true'" [(ngModel)]="sheet1input"
+                                     [ngModelOptions]="{standalone: true}"/>
+                            </div>
+                            <mat-option value="select">None</mat-option>
+                            <mat-option *ngFor="let item of userFiles | filter:sheet1input" [value]="item.path">{{item.file_name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                </div>
+              </mat-card-content>
+            </mat-card>
+            </div>
+            <div class="col-sm">
+            <mat-card class="example-card">
+              <mat-card-content>
+                <label style="display: block;font-size: 18px">Select F Cost File</label>
+                    <div calss="d-flex">
+                        <input style="margin-left: 30px;width: 200px;margin-top: 12px"  [disabled]="DisableUploadButtom" #fileinput3  accept=".csv" type="file" (change)="onuploadsheet3($event)"/>
+                        <mat-form-field appearance="outline" style="width: 150px">
+                          <mat-label>select Fcost sheet</mat-label>
+                          <mat-select #selectDropdown3 (valueChange)="onselectsheet3($event)"  [disabled]="DisableUploadButtom">
+                            <div>
+                              <input id="dateinput" matInput type="text" placeholder="search sheet"
+                                     style="border: none" focused="'true'" [(ngModel)]="sheet1input"
+                                     [ngModelOptions]="{standalone: true}"/>
+                            </div>
+                            <mat-option value="select">None</mat-option>
+                            <mat-option *ngFor="let item of userFiles | filter:sheet1input" [value]="item.path">{{item.file_name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                    </div>
+              </mat-card-content>
+            </mat-card>
+            </div>
+            <div>
+              <button id="upload" [disabled]="DisableUploadButtom" type="submit" class="btn btn-primary btn-lg" (click)="onSubmit()" style="margin-top: 25px">Upload</button>
+            </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</section>
+
+<div class="container-fluid d-flex row">
+          <mat-form-field appearance="fill" style="margin-left: 35px;width: 70px">
+          <mat-label>USD</mat-label>
+          <input type="number" matInput maxlength="3" [(ngModel)]="USD" (ngModelChange)="onUSDchange($event)"/>
+          </mat-form-field>
+<!--        <div class= "col">-->
+          <mat-form-field appearance="fill" style="margin-left: 5px">
+            <mat-label>select Campaign</mat-label>
+            <mat-select #selectCampaign (valueChange)="onCampaignChange($event)" [(ngModel)]="selectedCampaign">
+              <div>
+                <input id="dateinput" matInput type="text" placeholder="search campaign" style="border: none"focused="'true'" [(ngModel)]="campaigninput" [ngModelOptions]="{standalone: true}"/>
+              </div>
+              <mat-option value="None">None</mat-option>
+              <mat-option *ngFor="let item of campaignList | remarkFilter:campaigninput" [value]="item">{{item}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+<!--        <div class="col">-->
+          <mat-form-field appearance="fill" style="margin-left: 5px">
+            <mat-label>select Date</mat-label>
+            <mat-select #selectDate (valueChange)="onChangeDate($event)" [(ngModel)]="selectedDate">
+              <div>
+                <input id="dateinput" matInput type="text" placeholder="search date" style="border: none"focused="'true'" [(ngModel)]="dateinput" [ngModelOptions]="{standalone: true}"/>
+              </div>
+              <mat-option value="None">None</mat-option>
+              <mat-option *ngFor="let item of date | filter:dateinput" [value]="item.date">{{item.date}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+<!--      </div>-->
+        <mat-icon color="warn" matTooltip="Delete Data" style="cursor: pointer" (click)="deleteData()">delete</mat-icon>
+
+      <label class="form-check-label" style="margin-left: 10px;height: 40px">
+        <input type="checkbox" [(ngModel)]="remarkcheck" (ngModelChange)="oncheckRemark()" > Remark
+      </label>
+      <div class="form-check" *ngFor="let color of listcolor">
+        <label class="form-check-label" style="height: 40px">
+          <input type="checkbox" [(ngModel)]="color.checked" (ngModelChange)="colorSort()" style="background-color:{{color.title}}" >{{color.name}}
+        </label>
+      </div>
+
+</div>
+
+<div class=" container-fluid" style=" margin-top: -12px;line-height:1.5;padding-top: 0px">
+  <div id="table-scroll" class="table-scroll">
+    <table id="main-table" class="main-table">
+<!--      <thead #stickyhead [class.sticky]="tablehead">-->
+      <thead>
+      <tr>
+        <th scope="col" style="width: 8%">Campaign</th>
+<!--        <th scope="col" style="width: 6%">Date</th>-->
+        <th scope="col" style="width: 0%">Country</th>
+        <th scope="col" style="width: 0%">Conv</th>
+        <th scope="col" style="width: 0%">Cost Conv</th>
+        <th scope="col" style="width: 0%">Conv rate</th>
+        <th scope="col" (click)="costSort()" style="width: 0%;cursor: pointer">Cost $
+
+          <i [style.display]="sortlist.Cost ? 'contents' : 'none'"  class="fa fa-sort"></i>
+          <i [style.display]="sortlistAce.Cost ? 'contents' : 'none'" class="fa fa-sort-amount-asc"></i>
+          <i [style.display]="sortlistDesc.Cost ? 'contents' : 'none'" class="fa fa-sort-amount-desc"></i>
+          <br>{{data | sum : 'cost'}}
+        </th>
+
+        <th scope="col"(click)="earningSort()" style="width: 0%;cursor: pointer">Earning $
+          <i [style.display]="sortlist.Earning ? 'contents' : 'none'" class="fa fa-sort"></i>
+          <i [style.display]="sortlistAce.Earning ? 'contents' : 'none'" class="fa fa-sort-amount-asc"></i>
+          <i [style.display]="sortlistDesc.Earning ? 'contents' : 'none'" class="fa fa-sort-amount-desc"></i>
+        </th>
+        <th scope="col"(click)="profitSort()" style="width: 0%;cursor: pointer">Profit $
+
+          <i [style.display]="sortlist.Profit ? 'contents' : 'none'" class="fa fa-sort"></i>
+          <i [style.display]="sortlistAce.Profit ? 'contents' : 'none'" class="fa fa-sort-amount-asc"></i>
+          <i [style.display]="sortlistDesc.Profit ? 'contents' : 'none'" class="fa fa-sort-amount-desc"></i>
+          <br>{{data | sum : 'Profit'}}
+        </th>
+        <th scope="col" style="width: 0%">Profit Per Day
+        <br>{{data | sum : 'PerDayProfit'}}
+        </th>
+        <th scope="col"(click)="profitPercentSort()" style="width: 0%;cursor: pointer">Profit %
+          <i [style.display]="sortlist.ProfitPercent ? 'contents' : 'none'" class="fa fa-sort"></i>
+          <i [style.display]="sortlistAce.ProfitPercent ? 'contents' : 'none'" class="fa fa-sort-amount-asc"></i>
+          <i [style.display]="sortlistDesc.ProfitPercent ? 'contents' : 'none'" class="fa fa-sort-amount-desc"></i>
+        </th>
+        <th scope="col" (click)="ecpmSort()" style="width: 0%">E CPM
+          <i [style.display]="sortlist.ecpm ? 'contents' : 'none'" class="fa fa-sort"></i>
+          <i [style.display]="sortlistAce.ecpm ? 'contents' : 'none'" class="fa fa-sort-amount-asc"></i>
+          <i [style.display]="sortlistDesc.ecpm ? 'contents' : 'none'" class="fa fa-sort-amount-desc"></i>
+        </th>
+        <th scope="col" (click)="remarkSort()" style="cursor: pointer;width: 3%">Remark
+          <i [style.display]="sortlist.Remark ? 'contents' : 'none'" class="fa fa-sort"></i>
+          <i [style.display]="sortlistAce.Remark ? 'contents' : 'none'" class="fa fa-sort-amount-asc"></i>
+          <i [style.display]="sortlistDesc.Remark ? 'contents' : 'none'" class="fa fa-sort-amount-desc"></i>
+        </th>
+      </tr>
+<!--      <tr>-->
+<!--        <th></th>-->
+<!--        <th></th>-->
+<!--        <th></th>-->
+<!--        <th></th>-->
+<!--        <th></th>-->
+<!--        <th>{{data | sum : 'cost'}}</th>-->
+<!--        <th></th>-->
+<!--        <th>{{data | sum : 'Profit'}}</th>-->
+<!--        <th>{{data | sum : 'PerDayProfit'}}</th>-->
+<!--        <th></th>-->
+<!--        <th></th>-->
+<!--        <th></th>-->
+<!--      </tr>-->
+      </thead>
+      <tbody *ngFor="let item of data | filter: searchCampaign | filter : searchDate">
+      <tr>
+        <th style="background-color:{{item.ProfitFlageColor}};color: black" matTooltip="{{item.campaign}}">
+          <mat-icon matTooltip="copy" style="cursor: pointer;transform: scale(0.8)" (click)="copyToClipboard(item.campaign)">content_copy</mat-icon>
+          {{item.campaign | campaignTruncate :17}}
+        </th>
+        <td style="background-color:{{item.ProfitFlageColor}};color: black" matTooltip="{{item.country}}">
+          {{item.country | campaignTruncate : 10}}
+        </td>
+        <td style="background-color:{{item.ProfitFlageColor}};color: black" matTooltip="{{item.conversions}}">{{item.conversions}}</td>
+        <td style="background-color:{{item.ProfitFlageColor}};color: black" matTooltip="{{item.cost_conv}}">{{item.cost_conv}}</td>
+        <td style="background-color:{{item.ProfitFlageColor}};color: black" matTooltip="{{item.conv_rate}}">{{item.conv_rate}}</td>
+        <td style="background-color:{{item.ProfitFlageColor}};color: black" matTooltip="{{item.cost}}">{{item.cost}}</td>
+
+        <td style="background-color:{{item.ProfitFlageColor}};color: black" matTooltip="{{item.Earning}}">{{item.Earning}}</td>
+        <td style="background-color:{{item.ProfitFlageColor}};color: black" matTooltip="{{item.Profit}}">{{item.Profit}}</td>
+        <td style="background-color:{{item.ProfitFlageColor}};color: black" matTooltip="{{item.PerDayProfit}}">{{item.PerDayProfit}}</td>
+        <td style="background-color:{{item.ProfitFlageColor}};color: black" matTooltip="{{item.ProfitPercent}}">{{item.ProfitPercent}}</td>
+        <td style="background-color:{{item.ProfitFlageColor}};color: black" matTooltip="{{item.Rpm}}">{{item.Rpm}}</td>
+        <td style="background-color:{{item.ProfitFlageColor}};color: black" >
+          <input matTooltip="{{item.remark}}" type="text" value="{{item.remark}}"
+                 [readOnly]="item.Remark_editable"
+                 style="width: 100px"
+                 [style.background-color]="item.Remark_editable ? '#ebf2f7' : 'white'"
+                 (focusin)="focusin_remark($event)"
+                 (change)="change_remark($event)"
+                 (click)="Make_remark_Editable(item,item.remark)"
+                 (focusout)="focusout_remark($event,item)">
+          <!-- <mat-icon matTooltip="Update"
+              [style.display]="item.Remark_editable ? 'none' : 'contents'"
+              style="cursor: pointer;transform: scale(0.4);margin-left: 1px"
+              (click)="update_remark(item)">done</mat-icon> -->
+          <mat-icon matTooltip="History" style="cursor: pointer;transform: scale(0.8)" (click)="openDialog(item)" >description</mat-icon>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!--<form  [formGroup] ="uploadForm" class="justify-content-center">-->
+<!--  <div class="form-group row">-->
+<!--    <label style="display: flex">Please choose Campaign for upload</label>-->
+<!--    <div class="col-8">-->
+<!--      <input [disabled]="DisableUploadButtom" #fileinput1  accept=".csv" type="file" class="form-control-file" (change)="onselectsheet1($event)"/>-->
+<!--    </div>-->
+<!--    <div class="col-4">-->
+<!--    </div>-->
+<!--    <span class="text-danger"-->
+<!--          *ngIf="sheet1_Validation">-->
+<!--                              Please Choose File-->
+<!--                </span>-->
+<!--    <div class=" progress progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width:{{progress1}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{progress1}}</div>-->
+
+<!--  </div>-->
+<!--  <div class="form-group row ">-->
+<!--    <label style="display: flex">Please choose A Cost for upload</label>-->
+<!--    <div class="col-8">-->
+<!--      <input [disabled]="DisableUploadButtom" #fileinput2  accept=".csv" type="file" class="form-control-file" (change)="onselectsheet2($event)"/>-->
+<!--    </div>-->
+<!--    <div class="col-4">-->
+<!--    </div>-->
+<!--    <div class=" progress progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width :{{progress2}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{progress2}}</div>-->
+<!--  </div>-->
+<!--  <div class="form-group row">-->
+<!--    <label style="display: flex">Please choose B Cost for upload</label>-->
+<!--    <div class="col-8">-->
+<!--      <input [disabled]="DisableUploadButtom" #fileinput3  accept=".csv" type="file" class="form-control-file" (change)="onselectsheet3($event)"/>-->
+<!--    </div>-->
+<!--    <div class="col-4">-->
+<!--    </div>-->
+<!--    <div class=" progress progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width:{{progress3}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{progress3}}</div>-->
+
+<!--  </div>-->
+<!--  <button [disabled]="DisableUploadButtom" type="submit" class="btn btn-primary btn-sm" (click)="onSubmittemp()">Upload</button>-->
+<!--</form>-->
+
+<!--<div class=" col-lg-6 col-md-8 col-sm-10 mx-auto">-->
+<!--  <h1 class="display-4 py-2" id="text-color">Analytics</h1>-->
+<!--</div>-->
+<!--<div class="container">-->
+<!--  <form [formGroup] ="uploadForm">-->
+<!--    <mat-card style="background-color: #d1d9de;margin: 20px;">-->
+<!--      <mat-card-content>-->
+<!--        <label style="display: block;font-size: 18px">Select Campaign File <label style="color: red">*</label></label>-->
+<!--        <span class="text-danger" *ngIf="sheet1_Validation">Please Choose File</span>-->
+<!--        &lt;!&ndash;                    <button mat-raised-button color="primary">&ndash;&gt;-->
+<!--        &lt;!&ndash;                      <mat-icon>add</mat-icon>&ndash;&gt;-->
+<!--        &lt;!&ndash;                      upload&ndash;&gt;-->
+<!--        &lt;!&ndash;                    </button>&ndash;&gt;-->
+<!--        <input  [disabled]="DisableUploadButtom" #fileinput1  accept=".csv" type="file"  (change)="onuploadsheet1($event)"/>-->
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>select campaign sheet</mat-label>-->
+<!--          <mat-select #selectDropdown1 (valueChange)="onselectsheet1($event)" [disabled]="DisableUploadButtom">-->
+<!--            <div>-->
+<!--              <input id="dateinput" matInput type="text" placeholder="search sheet"-->
+<!--                     style="border: none" focused="'true'" [(ngModel)]="sheet1input"-->
+<!--                     [ngModelOptions]="{standalone: true}"/>-->
+<!--            </div>-->
+<!--            <mat-option value="select">None</mat-option>-->
+<!--            <mat-option *ngFor="let item of userFiles | filter:sheet1input" [value]="item.path">{{item.file_name}}</mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+<!--      </mat-card-content>-->
+<!--    </mat-card>-->
+<!--    <mat-card style="background-color: #d1d9de;margin: 20px">-->
+<!--      <mat-card-content>-->
+<!--        <label style="display: block;font-size: 18px">Select A Cost File</label>-->
+<!--        <input [disabled]="DisableUploadButtom" #fileinput2  accept=".csv" type="file" (change)="onuploadsheet2($event)"/>-->
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>select Acost sheet</mat-label>-->
+<!--          <mat-select #selectDropdown2 (valueChange)="onselectsheet2($event)"  [disabled]="DisableUploadButtom">-->
+<!--            <div>-->
+<!--              <input id="dateinput" matInput type="text" placeholder="search sheet"-->
+<!--                     style="border: none" focused="'true'" [(ngModel)]="sheet1input"-->
+<!--                     [ngModelOptions]="{standalone: true}"/>-->
+<!--            </div>-->
+<!--            <mat-option value="select">None</mat-option>-->
+<!--            <mat-option *ngFor="let item of userFiles | filter:sheet1input" [value]="item.path">{{item.file_name}}</mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+<!--      </mat-card-content>-->
+<!--    </mat-card>-->
+<!--    <mat-card style="background-color: #d1d9de;margin: 20px">-->
+<!--      <mat-card-content>-->
+<!--        <label style="display: block;font-size: 18px">Select B Cost File</label>-->
+<!--        <input [disabled]="DisableUploadButtom" #fileinput3  accept=".csv" type="file" (change)="onuploadsheet3($event)"/>-->
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>select Bcost sheet</mat-label>-->
+<!--          <mat-select #selectDropdown3 (valueChange)="onselectsheet3($event)"  [disabled]="DisableUploadButtom">-->
+<!--            <div>-->
+<!--              <input id="dateinput" matInput type="text" placeholder="search sheet"-->
+<!--                     style="border: none" focused="'true'" [(ngModel)]="sheet1input"-->
+<!--                     [ngModelOptions]="{standalone: true}"/>-->
+<!--            </div>-->
+<!--            <mat-option value="select">None</mat-option>-->
+<!--            <mat-option *ngFor="let item of userFiles | filter:sheet1input" [value]="item.path">{{item.file_name}}</mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+<!--      </mat-card-content>-->
+<!--    </mat-card>-->
+<!--    <button id="upload" [disabled]="DisableUploadButtom" type="submit" class="btn btn-primary btn-lg" (click)="onSubmit()" style="margin-top: 25px">Upload</button>-->
+<!--    <div style="margin-top: 20px">-->
+<!--      <div [style.display]="DisableUploadButtom ? '' : 'none'">-->
+<!--        <mat-progress-bar mode="query"></mat-progress-bar>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </form>-->
+<!--</div>-->
